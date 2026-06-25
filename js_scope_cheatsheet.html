@@ -1,0 +1,60 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.card-head-label{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.card-head-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.code-block{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.7;white-space:pre}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;font-family:var(--font-sans);margin-top:8px}
+.badge-ok{background:#EAF3DE;color:#27500A}
+.badge-err{background:#FCEBEB;color:#791F1F}
+.global .card-head{background:#E6F1FB}.global .card-head-label{color:#185FA5}
+.block .card-head{background:#EEEDFE}.block .card-head-label{color:#534AB7}
+.hoist .card-head{background:#FAEEDA}.hoist .card-head-label{color:#854F0B}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Scope &amp; hoisting</h1>
+<p class="cs-sub">How JavaScript handles variable visibility and declarations</p>
+<div class="grid">
+<div class="card global">
+  <div class="card-head"><div class="card-head-label">Global scope</div><div class="card-head-title">Accessible everywhere</div></div>
+  <div class="body">
+    <div class="desc">Variables declared outside any function or block are globally accessible.</div>
+    <div class="code-block">let a = 10;
+
+function show() {
+  console.log(a);
+}</div>
+    <span class="badge badge-ok">✓ Works fine</span>
+  </div>
+</div>
+<div class="card block">
+  <div class="card-head"><div class="card-head-label">Block scope</div><div class="card-head-title">let &amp; const stay inside { }</div></div>
+  <div class="body">
+    <div class="desc">Variables declared with <span style="font-family:var(--font-mono);font-size:12px">let</span> or <span style="font-family:var(--font-mono);font-size:12px">const</span> are only accessible within their block.</div>
+    <div class="code-block">{
+  let x = 5;
+}
+
+console.log(x);</div>
+    <span class="badge badge-err">✗ ReferenceError</span>
+  </div>
+</div>
+<div class="card hoist">
+  <div class="card-head"><div class="card-head-label">Hoisting</div><div class="card-head-title">Declarations move to top</div></div>
+  <div class="body">
+    <div class="desc">JS moves declarations to the top before running. <span style="font-family:var(--font-mono);font-size:12px">let</span>/<span style="font-family:var(--font-mono);font-size:12px">const</span> are hoisted but NOT initialised — accessing them throws. <span style="font-family:var(--font-mono);font-size:12px">var</span> is hoisted AND initialised as <span style="font-family:var(--font-mono);font-size:12px">undefined</span>.</div>
+    <div class="code-block">console.log(a);
+let a = 10;</div>
+    <span class="badge badge-err">✗ ReferenceError (TDZ)</span>
+  </div>
+</div>
+</div>
+</div>

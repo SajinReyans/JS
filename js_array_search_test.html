@@ -1,0 +1,100 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.ttl{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.8;white-space:pre}
+.out{font-size:12px;font-family:var(--font-mono);margin-top:8px;padding:4px 8px;background:var(--color-background-tertiary);border-radius:4px;border-left:2px solid #1D9E75;color:var(--color-text-secondary)}
+.ret-pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;font-family:var(--font-sans);margin-bottom:8px}
+.ret-val{background:#E6F1FB;color:#0C447C}
+.ret-idx{background:#EAF3DE;color:#27500A}
+.ret-bool{background:#EEEDFE;color:#3C3489}
+.kw{color:#185FA5}.str{color:#3B6D11}.cm{color:#888780;font-style:italic}.num{color:#854F0B}
+.fi .card-head{background:#E6F1FB}.fi .lbl{color:#185FA5}
+.fx .card-head{background:#EAF3DE}.fx .lbl{color:#3B6D11}
+.sm .card-head{background:#EEEDFE}.sm .lbl{color:#534AB7}
+.ev .card-head{background:#E1F5EE}.ev .lbl{color:#0F6E56}
+.ic .card-head{background:#FAEEDA}.ic .lbl{color:#854F0B}
+.io .card-head{background:#F1EFE8}.io .lbl{color:#5F5E5A}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Array search &amp; test methods</h1>
+<p class="cs-sub">Find elements, check positions, and test whether conditions pass</p>
+<div class="grid">
+
+<div class="card fi">
+  <div class="card-head"><div class="lbl">find()</div><div class="ttl">First matching value</div></div>
+  <div class="body">
+    <span class="ret-pill ret-val">returns value</span>
+    <div class="desc">Returns the first element where the callback is <span style="font-family:var(--font-mono);font-size:12px">true</span>. Returns <span style="font-family:var(--font-mono);font-size:12px">undefined</span> if nothing matches.</div>
+    <div class="cb">[<span class="num">1</span>, <span class="num">4</span>, <span class="num">7</span>]
+  .find(n => n > <span class="num">3</span>);</div>
+    <div class="out">→ 4  (first match)</div>
+  </div>
+</div>
+
+<div class="card fx">
+  <div class="card-head"><div class="lbl">findIndex()</div><div class="ttl">First matching index</div></div>
+  <div class="body">
+    <span class="ret-pill ret-idx">returns index</span>
+    <div class="desc">Same as <span style="font-family:var(--font-mono);font-size:12px">find()</span> but returns the position instead of the value. Returns <span style="font-family:var(--font-mono);font-size:12px">-1</span> if not found.</div>
+    <div class="cb">[<span class="num">1</span>, <span class="num">4</span>, <span class="num">7</span>]
+  .findIndex(n => n > <span class="num">3</span>);</div>
+    <div class="out">→ 1  (position of 4)</div>
+  </div>
+</div>
+
+<div class="card sm">
+  <div class="card-head"><div class="lbl">some()</div><div class="ttl">At least one passes?</div></div>
+  <div class="body">
+    <span class="ret-pill ret-bool">returns boolean</span>
+    <div class="desc">Returns <span style="font-family:var(--font-mono);font-size:12px">true</span> if at least one element satisfies the condition. Short-circuits on first match.</div>
+    <div class="cb">[<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+  .some(n => n > <span class="num">2</span>);</div>
+    <div class="out">→ true</div>
+  </div>
+</div>
+
+<div class="card ev">
+  <div class="card-head"><div class="lbl">every()</div><div class="ttl">All elements pass?</div></div>
+  <div class="body">
+    <span class="ret-pill ret-bool">returns boolean</span>
+    <div class="desc">Returns <span style="font-family:var(--font-mono);font-size:12px">true</span> only if every element satisfies the condition. Short-circuits on first failure.</div>
+    <div class="cb">[<span class="num">2</span>, <span class="num">4</span>, <span class="num">6</span>]
+  .every(n => n % <span class="num">2</span> === <span class="num">0</span>);</div>
+    <div class="out">→ true</div>
+  </div>
+</div>
+
+<div class="card ic">
+  <div class="card-head"><div class="lbl">includes()</div><div class="ttl">Does value exist?</div></div>
+  <div class="body">
+    <span class="ret-pill ret-bool">returns boolean</span>
+    <div class="desc">Simple existence check — no callback needed. Uses strict equality.</div>
+    <div class="cb">[<span class="num">1</span>, <span class="num">2</span>, <span class="num">5</span>].includes(<span class="num">5</span>);
+[<span class="num">1</span>, <span class="num">2</span>, <span class="num">5</span>].includes(<span class="num">9</span>);</div>
+    <div class="out">→ true  /  false</div>
+  </div>
+</div>
+
+<div class="card io">
+  <div class="card-head"><div class="lbl">indexOf()</div><div class="ttl">Position of a value</div></div>
+  <div class="body">
+    <span class="ret-pill ret-idx">returns index</span>
+    <div class="desc">Returns the first index of the value, or <span style="font-family:var(--font-mono);font-size:12px">-1</span> if not found.</div>
+    <div class="cb">[<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>].indexOf(<span class="num">20</span>);
+[<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>].indexOf(<span class="num">99</span>);</div>
+    <div class="out">→ 1  /  -1</div>
+  </div>
+</div>
+
+</div>
+</div>

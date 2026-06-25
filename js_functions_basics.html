@@ -1,0 +1,114 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.ttl{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.8;white-space:pre}
+.out{font-size:12px;font-family:var(--font-mono);color:var(--color-text-secondary);margin-top:8px;padding:4px 8px;background:var(--color-background-tertiary);border-radius:4px;border-left:2px solid #1D9E75}
+.out-warn{border-left-color:#E24B4A}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.tag{font-size:12px;font-family:var(--font-mono);padding:3px 9px;border-radius:4px}
+.kw{color:#185FA5}.str{color:#3B6D11}.cm{color:#888780;font-style:italic}.num{color:#854F0B}
+.decl .card-head{background:#E6F1FB}.decl .lbl{color:#185FA5}
+.hoist .card-head{background:#EAF3DE}.hoist .lbl{color:#3B6D11}
+.params .card-head{background:#FAEEDA}.params .lbl{color:#854F0B}
+.def .card-head{background:#EEEDFE}.def .lbl{color:#534AB7}
+.rest .card-head{background:#E1F5EE}.rest .lbl{color:#0F6E56}
+.ret .card-head{background:#FAECE7}.ret .lbl{color:#993C1D}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Function declaration, parameters &amp; return</h1>
+<p class="cs-sub">How to define functions, pass data in, and send data back</p>
+<div class="grid">
+
+<div class="card decl">
+  <div class="card-head"><div class="lbl">Declaration</div><div class="ttl">Define with function keyword</div></div>
+  <div class="body">
+    <div class="desc">Use the <span style="font-family:var(--font-mono);font-size:12px">function</span> keyword, give it a name, then call it by that name.</div>
+    <div class="cb"><span class="kw">function</span> greet() {
+  console.log(<span class="str">"Hello"</span>);
+}
+
+greet();</div>
+    <div class="out">→ Hello</div>
+  </div>
+</div>
+
+<div class="card hoist">
+  <div class="card-head"><div class="lbl">Hoisting</div><div class="ttl">Call before defining</div></div>
+  <div class="body">
+    <div class="desc">Function declarations are fully hoisted — you can call them above where they appear in the file.</div>
+    <div class="cb">sayHi(); <span class="cm">// works!</span>
+
+<span class="kw">function</span> sayHi() {
+  console.log(<span class="str">"Hi"</span>);
+}</div>
+    <div class="out">→ Hi</div>
+  </div>
+</div>
+
+<div class="card params">
+  <div class="card-head"><div class="lbl">Parameters &amp; Arguments</div><div class="ttl">Pass data into a function</div></div>
+  <div class="body">
+    <div class="desc"><span style="font-family:var(--font-mono);font-size:12px">name</span> is the <span style="font-weight:500">parameter</span> (placeholder). <span style="font-family:var(--font-mono);font-size:12px">"Sajin"</span> is the <span style="font-weight:500">argument</span> (real value).</div>
+    <div class="cb"><span class="kw">function</span> add(a, b) {
+  console.log(a + b);
+}
+
+add(<span class="num">2</span>, <span class="num">3</span>);</div>
+    <div class="out">→ 5</div>
+  </div>
+</div>
+
+<div class="card def">
+  <div class="card-head"><div class="lbl">Default Parameters</div><div class="ttl">Fallback when missing</div></div>
+  <div class="body">
+    <div class="desc">If an argument is not passed, the default value is used instead of <span style="font-family:var(--font-mono);font-size:12px">undefined</span>.</div>
+    <div class="cb"><span class="kw">function</span> greet(name = <span class="str">"Guest"</span>) {
+  console.log(name);
+}
+
+greet();
+greet(<span class="str">"Sajin"</span>);</div>
+    <div class="out">→ Guest  /  Sajin</div>
+  </div>
+</div>
+
+<div class="card rest">
+  <div class="card-head"><div class="lbl">Rest Parameters</div><div class="ttl">Collect many args into array</div></div>
+  <div class="body">
+    <div class="desc">Use <span style="font-family:var(--font-mono);font-size:12px">...name</span> as the last parameter to collect any number of arguments into an array.</div>
+    <div class="cb"><span class="kw">function</span> total(...nums) {
+  console.log(nums);
+}
+
+total(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>);</div>
+    <div class="out">→ [1, 2, 3]</div>
+  </div>
+</div>
+
+<div class="card ret">
+  <div class="card-head"><div class="lbl">Return</div><div class="ttl">Send a value back</div></div>
+  <div class="body">
+    <div class="desc"><span style="font-family:var(--font-mono);font-size:12px">return</span> sends data out of the function and also <span style="font-weight:500">stops execution</span> — nothing after it runs.</div>
+    <div class="cb"><span class="kw">function</span> add(a, b) {
+  <span class="kw">return</span> a + b;
+  console.log(<span class="str">"never"</span>); <span class="cm">// skipped</span>
+}
+
+<span class="kw">let</span> result = add(<span class="num">2</span>, <span class="num">3</span>);
+console.log(result);</div>
+    <div class="out">→ 5</div>
+  </div>
+</div>
+
+</div>
+</div>

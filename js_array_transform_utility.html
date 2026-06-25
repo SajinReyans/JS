@@ -1,0 +1,133 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.ttl{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.8;white-space:pre}
+.cb+.cb{margin-top:6px}
+.out{font-size:12px;font-family:var(--font-mono);margin-top:8px;padding:4px 8px;background:var(--color-background-tertiary);border-radius:4px;border-left:2px solid #1D9E75;color:var(--color-text-secondary)}
+.out-warn{border-left-color:#E24B4A}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;font-family:var(--font-sans);margin-bottom:8px;margin-right:4px}
+.pill-mut{background:#FCEBEB;color:#791F1F}
+.pill-safe{background:#EAF3DE;color:#27500A}
+.mrow{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.mrow:last-child{border-bottom:none}
+.mname{font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:85px}
+.mnote{font-size:12px;color:var(--color-text-secondary);font-family:var(--font-sans)}
+.kw{color:#185FA5}.str{color:#3B6D11}.cm{color:#888780;font-style:italic}.num{color:#854F0B}
+.so .card-head{background:#FAEEDA}.so .lbl{color:#854F0B}
+.sl .card-head{background:#E6F1FB}.sl .lbl{color:#185FA5}
+.sp .card-head{background:#FAECE7}.sp .lbl{color:#993C1D}
+.ut .card-head{background:#E1F5EE}.ut .lbl{color:#0F6E56}.ut .mname{color:#085041}
+.ds .card-head{background:#EEEDFE}.ds .lbl{color:#534AB7}
+.spr .card-head{background:#EAF3DE}.spr .lbl{color:#3B6D11}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Array transform &amp; utility methods</h1>
+<p class="cs-sub">Sort, slice, splice, destructuring, spread, and other handy methods</p>
+<div class="grid">
+
+<div class="card so">
+  <div class="card-head"><div class="lbl">sort()</div><div class="ttl">Always pass a comparator</div></div>
+  <div class="body">
+    <span class="pill pill-mut">mutates original</span>
+    <div class="desc">Default sort is alphabetical (string-based) — always pass <span style="font-family:var(--font-mono);font-size:12px">(a,b)=>a-b</span> for numbers.</div>
+    <div class="cb"><span class="cm">// wrong — string sort</span>
+[<span class="num">1</span>,<span class="num">10</span>,<span class="num">2</span>].sort();</div>
+    <div class="out out-warn">→ [1, 10, 2]  ✗</div>
+    <div class="cb" style="margin-top:8px"><span class="cm">// ascending</span>
+[<span class="num">1</span>,<span class="num">10</span>,<span class="num">2</span>].sort((a,b) => a-b);
+<span class="cm">// descending</span>
+[<span class="num">1</span>,<span class="num">10</span>,<span class="num">2</span>].sort((a,b) => b-a);
+<span class="cm">// by object property</span>
+users.sort((a,b) => a.age-b.age);</div>
+    <div class="out">→ [1, 2, 10]</div>
+  </div>
+</div>
+
+<div class="card sl">
+  <div class="card-head"><div class="lbl">slice(start, end)</div><div class="ttl">Extract without modifying</div></div>
+  <div class="body">
+    <span class="pill pill-safe">original unchanged</span>
+    <div class="desc">Returns a portion from <span style="font-family:var(--font-mono);font-size:12px">start</span> up to but not including <span style="font-family:var(--font-mono);font-size:12px">end</span>. Negative index counts from end.</div>
+    <div class="cb">[<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>].slice(<span class="num">1</span>, <span class="num">3</span>);
+<span class="cm">// start 1, up to (not inc) 3</span>
+
+[<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>].slice(-<span class="num">2</span>);
+<span class="cm">// last 2 elements</span></div>
+    <div class="out">→ [2, 3]  /  [3, 4]</div>
+  </div>
+</div>
+
+<div class="card sp">
+  <div class="card-head"><div class="lbl">splice(start, del, ...items)</div><div class="ttl">Remove, insert, replace</div></div>
+  <div class="body">
+    <span class="pill pill-mut">mutates original</span>
+    <div class="cb"><span class="cm">// remove 2 from index 1</span>
+arr.splice(<span class="num">1</span>, <span class="num">2</span>);
+
+<span class="cm">// insert 99 at index 1</span>
+arr.splice(<span class="num">1</span>, <span class="num">0</span>, <span class="num">99</span>);
+
+<span class="cm">// replace 1 item at index 1</span>
+arr.splice(<span class="num">1</span>, <span class="num">1</span>, <span class="num">99</span>);</div>
+  </div>
+</div>
+
+<div class="card ds">
+  <div class="card-head"><div class="lbl">Destructuring</div><div class="ttl">Unpack into variables</div></div>
+  <div class="body">
+    <div class="desc">Pull array values directly into named variables by position.</div>
+    <div class="cb"><span class="kw">let</span> [a, b] = [<span class="num">10</span>, <span class="num">20</span>];
+<span class="cm">// a=10, b=20</span>
+
+<span class="cm">// skip index 1</span>
+<span class="kw">let</span> [x, , z] = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>];
+<span class="cm">// x=1, z=3</span>
+
+<span class="cm">// rest of array</span>
+<span class="kw">let</span> [first, ...rest] = [<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>];
+<span class="cm">// first=1, rest=[2,3]</span></div>
+  </div>
+</div>
+
+<div class="card spr">
+  <div class="card-head"><div class="lbl">Spread operator</div><div class="ttl">Copy and merge arrays</div></div>
+  <div class="body">
+    <div class="desc">Use <span style="font-family:var(--font-mono);font-size:12px">...</span> to expand an array into individual elements — copy, merge, or pass as args.</div>
+    <div class="cb"><span class="cm">// copy</span>
+<span class="kw">let</span> copy = [...arr];
+
+<span class="cm">// merge</span>
+<span class="kw">let</span> merged = [...a, ...b];
+
+<span class="cm">// pass as args</span>
+Math.max(...nums);</div>
+  </div>
+</div>
+
+<div class="card ut">
+  <div class="card-head"><div class="lbl">Utility methods</div><div class="ttl">concat, reverse, join, flat, from</div></div>
+  <div class="body">
+    <div class="mrow"><span class="mname">concat(b)</span><span class="mnote">merge a + b → new array</span></div>
+    <div class="mrow"><span class="mname">reverse()</span><span class="mnote">flip order (mutates)</span></div>
+    <div class="mrow"><span class="mname">join("-")</span><span class="mnote">array → string with separator</span></div>
+    <div class="mrow"><span class="mname">flat(depth)</span><span class="mnote">flatten nested arrays</span></div>
+    <div class="mrow"><span class="mname">Array.from()</span><span class="mnote">convert iterable to array</span></div>
+    <div class="mrow"><span class="mname">isArray()</span><span class="mnote">check if value is array</span></div>
+    <div class="cb" style="margin-top:10px">[<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>].join(<span class="str">"-"</span>);     <span class="cm">// "1-2-3"</span>
+[<span class="num">1</span>,[<span class="num">2</span>,[<span class="num">3</span>]]].flat(<span class="num">2</span>); <span class="cm">// [1,2,3]</span>
+Array.from(<span class="str">"hi"</span>);    <span class="cm">// ["h","i"]</span></div>
+  </div>
+</div>
+
+</div>
+</div>

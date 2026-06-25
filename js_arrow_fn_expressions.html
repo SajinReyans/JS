@@ -1,0 +1,122 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.ttl{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.8;white-space:pre}
+.cb+.cb{margin-top:6px}
+.out{font-size:12px;font-family:var(--font-mono);color:var(--color-text-secondary);margin-top:8px;padding:4px 8px;background:var(--color-background-tertiary);border-radius:4px;border-left:2px solid #1D9E75}
+.out-warn{border-left-color:#E24B4A}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;font-family:var(--font-sans);margin-bottom:8px}
+.pill-ok{background:#EAF3DE;color:#27500A}
+.pill-bad{background:#FCEBEB;color:#791F1F}
+.kw{color:#185FA5}.str{color:#3B6D11}.cm{color:#888780;font-style:italic}.num{color:#854F0B}
+.expr .card-head{background:#EEEDFE}.expr .lbl{color:#534AB7}
+.arr .card-head{background:#E6F1FB}.arr .lbl{color:#185FA5}
+.imp .card-head{background:#E1F5EE}.imp .lbl{color:#0F6E56}
+.obj .card-head{background:#FAEEDA}.obj .lbl{color:#854F0B}
+.this .card-head{background:#FAECE7}.this .lbl{color:#993C1D}
+.nh .card-head{background:#FCEBEB}.nh .lbl{color:#A32D2D}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Function expressions &amp; arrow functions</h1>
+<p class="cs-sub">Two alternate ways to write functions — with key differences in hoisting and <span style="font-family:var(--font-mono)">this</span></p>
+<div class="grid">
+
+<div class="card expr">
+  <div class="card-head"><div class="lbl">Function expression</div><div class="ttl">Store function in variable</div></div>
+  <div class="body">
+    <div class="desc">Assign a function to a <span style="font-family:var(--font-mono);font-size:12px">const</span>/<span style="font-family:var(--font-mono);font-size:12px">let</span>. Not hoisted — must be defined before calling.</div>
+    <div class="cb"><span class="kw">const</span> greet = <span class="kw">function</span>() {
+  console.log(<span class="str">"Hello"</span>);
+};
+
+greet();</div>
+    <div class="out">→ Hello</div>
+  </div>
+</div>
+
+<div class="card nh">
+  <div class="card-head"><div class="lbl">Not hoisted</div><div class="ttl">Call after only</div></div>
+  <div class="body">
+    <div class="desc">Unlike declarations, function expressions cannot be called before the line they appear on.</div>
+    <div class="cb">greet(); <span class="cm">// ✗ Error</span>
+
+<span class="kw">const</span> greet = <span class="kw">function</span>() {
+  console.log(<span class="str">"Hello"</span>);
+};</div>
+    <div class="out out-warn">→ ReferenceError</div>
+  </div>
+</div>
+
+<div class="card arr">
+  <div class="card-head"><div class="lbl">Arrow function</div><div class="ttl">Shorter syntax with =></div></div>
+  <div class="body">
+    <div class="desc">Arrow functions are compact. Single param → no brackets. Single expression → no <span style="font-family:var(--font-mono);font-size:12px">return</span>.</div>
+    <div class="cb"><span class="cm">// no params</span>
+<span class="kw">const</span> greet = () => console.log(<span class="str">"Hi"</span>);
+
+<span class="cm">// one param — no ( ) needed</span>
+<span class="kw">const</span> square = x => x * x;
+
+<span class="cm">// multiple params</span>
+<span class="kw">const</span> add = (a, b) => a + b;</div>
+  </div>
+</div>
+
+<div class="card imp">
+  <div class="card-head"><div class="lbl">Implicit return</div><div class="ttl">Skip the return keyword</div></div>
+  <div class="body">
+    <div class="desc">If the body is a single expression (no <span style="font-family:var(--font-mono);font-size:12px">{ }</span>), the result is returned automatically.</div>
+    <div class="cb"><span class="cm">// explicit (with braces)</span>
+<span class="kw">const</span> add = (a, b) => {
+  <span class="kw">return</span> a + b;
+};
+
+<span class="cm">// implicit (no braces)</span>
+<span class="kw">const</span> add = (a, b) => a + b;</div>
+    <div class="out">→ same result</div>
+  </div>
+</div>
+
+<div class="card obj">
+  <div class="card-head"><div class="lbl">Return object</div><div class="ttl">Wrap in ( ) to avoid confusion</div></div>
+  <div class="body">
+    <div class="desc"><span style="font-family:var(--font-mono);font-size:12px">{ }</span> is ambiguous — JS treats it as a function body. Wrap the object in <span style="font-family:var(--font-mono);font-size:12px">( )</span> to return it.</div>
+    <div class="pill pill-bad">✗ wrong</div>
+    <div class="cb"><span class="kw">const</span> user = () => { name: <span class="str">"A"</span> };</div>
+    <div class="pill pill-ok" style="margin-top:8px">✓ correct</div>
+    <div class="cb"><span class="kw">const</span> user = () => ({ name: <span class="str">"A"</span> });</div>
+  </div>
+</div>
+
+<div class="card this">
+  <div class="card-head"><div class="lbl">No own this</div><div class="ttl">Arrow borrows outer this</div></div>
+  <div class="body">
+    <div class="desc">Regular functions get their own <span style="font-family:var(--font-mono);font-size:12px">this</span>. Arrow functions inherit <span style="font-family:var(--font-mono);font-size:12px">this</span> from the surrounding scope — important in React.</div>
+    <div class="cb"><span class="cm">// regular — this = person</span>
+<span class="kw">const</span> person = {
+  name: <span class="str">"A"</span>,
+  show: <span class="kw">function</span>() {
+    console.log(<span class="kw">this</span>.name);
+  }
+};
+
+<span class="cm">// arrow — this = outer scope</span>
+<span class="kw">const</span> person = {
+  name: <span class="str">"A"</span>,
+  show: () => console.log(<span class="kw">this</span>)
+};</div>
+  </div>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,88 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.ttl{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.8;white-space:pre}
+.out{font-size:12px;font-family:var(--font-mono);margin-top:8px;padding:4px 8px;background:var(--color-background-tertiary);border-radius:4px;border-left:2px solid #1D9E75;color:var(--color-text-secondary)}
+.mrow{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.mrow:last-child{border-bottom:none}
+.mname{font-family:var(--font-mono);font-size:13px;font-weight:500;min-width:80px}
+.mnote{font-size:12px;color:var(--color-text-secondary);font-family:var(--font-sans)}
+.badge{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;font-family:var(--font-sans);margin-bottom:6px}
+.kw{color:#185FA5}.str{color:#3B6D11}.cm{color:#888780;font-style:italic}.num{color:#854F0B}
+.cr .card-head{background:#E6F1FB}.cr .lbl{color:#185FA5}.cr .mname{color:#0C447C}
+.ac .card-head{background:#EAF3DE}.ac .lbl{color:#3B6D11}
+.ad .card-head{background:#FAEEDA}.ad .lbl{color:#854F0B}.ad .mname{color:#633806}
+.rm .card-head{background:#FAECE7}.rm .lbl{color:#993C1D}.rm .mname{color:#712B13}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Arrays — create, access &amp; mutate</h1>
+<p class="cs-sub">How to create arrays, read and update elements, and add or remove items</p>
+<div class="grid">
+
+<div class="card cr">
+  <div class="card-head"><div class="lbl">Create</div><div class="ttl">Three ways to make an array</div></div>
+  <div class="body">
+    <div class="cb"><span class="cm">// literal — most common</span>
+<span class="kw">let</span> arr = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>];
+
+<span class="cm">// empty</span>
+<span class="kw">let</span> arr = [];
+
+<span class="cm">// constructor — avoid</span>
+<span class="kw">let</span> arr = <span class="kw">new</span> Array(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>);</div>
+  </div>
+</div>
+
+<div class="card ac">
+  <div class="card-head"><div class="lbl">Access &amp; modify</div><div class="ttl">Read and change by index</div></div>
+  <div class="body">
+    <div class="desc">Arrays are zero-indexed. Use bracket notation to read or overwrite any position.</div>
+    <div class="cb"><span class="kw">let</span> nums = [<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>];
+
+nums[<span class="num">0</span>];             <span class="cm">// 10</span>
+nums[<span class="num">1</span>] = <span class="num">99</span>;       <span class="cm">// modify</span>
+nums.length;        <span class="cm">// 3</span>
+nums[nums.length-<span class="num">1</span>];<span class="cm">// last</span></div>
+  </div>
+</div>
+
+<div class="card ad">
+  <div class="card-head"><div class="lbl">Add elements</div><div class="ttl">push &amp; unshift</div></div>
+  <div class="body">
+    <div class="mrow"><span class="mname">push()</span><span class="mnote">add to end</span></div>
+    <div class="mrow"><span class="mname">unshift()</span><span class="mnote">add to beginning</span></div>
+    <div class="cb" style="margin-top:10px"><span class="kw">let</span> arr = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>];
+
+arr.push(<span class="num">4</span>);
+<span class="cm">// [1, 2, 3, 4]</span>
+
+arr.unshift(<span class="num">0</span>);
+<span class="cm">// [0, 1, 2, 3, 4]</span></div>
+  </div>
+</div>
+
+<div class="card rm">
+  <div class="card-head"><div class="lbl">Remove elements</div><div class="ttl">pop &amp; shift</div></div>
+  <div class="body">
+    <div class="mrow"><span class="mname">pop()</span><span class="mnote">remove from end</span></div>
+    <div class="mrow"><span class="mname">shift()</span><span class="mnote">remove from beginning</span></div>
+    <div class="cb" style="margin-top:10px"><span class="kw">let</span> arr = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>];
+
+arr.pop();   <span class="cm">// removes 3</span>
+arr.shift();  <span class="cm">// removes 1</span>
+<span class="cm">// [2]</span></div>
+  </div>
+</div>
+
+</div>
+</div>

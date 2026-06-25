@@ -1,0 +1,96 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.ttl{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.8;white-space:pre}
+.out{font-size:12px;font-family:var(--font-mono);color:var(--color-text-secondary);margin-top:8px;padding:4px 8px;background:var(--color-background-tertiary);border-radius:4px;border-left:2px solid #1D9E75}
+.out-warn{border-left-color:#E24B4A}
+.kw{color:#185FA5}.str{color:#3B6D11}.cm{color:#888780;font-style:italic}.hl{color:#993C1D;font-weight:500}
+.sw .card-head{background:#FAEEDA}.sw .lbl{color:#854F0B}
+.brk .card-head{background:#FCEBEB}.brk .lbl{color:#A32D2D}
+.ft .card-head{background:#FAECE7}.ft .lbl{color:#993C1D}
+.grp .card-head{background:#E1F5EE}.grp .lbl{color:#0F6E56}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Switch statement</h1>
+<p class="cs-sub">Cleaner alternative to long if / else if chains — matches a value to a case</p>
+<div class="grid">
+
+<div class="card sw">
+  <div class="card-head"><div class="lbl">switch</div><div class="ttl">Basic usage</div></div>
+  <div class="body">
+    <div class="desc">Evaluates a value and jumps to the matching <span style="font-family:var(--font-mono);font-size:12px">case</span>. <span style="font-family:var(--font-mono);font-size:12px">default</span> runs if nothing matches.</div>
+    <div class="cb"><span class="kw">let</span> day = 2;
+<span class="kw">switch</span> (day) {
+  <span class="kw">case</span> 1:
+    console.log(<span class="str">"Mon"</span>);
+    <span class="kw">break</span>;
+  <span class="kw">case</span> 2:
+    console.log(<span class="str">"Tue"</span>);
+    <span class="kw">break</span>;
+  <span class="kw">default</span>:
+    console.log(<span class="str">"Invalid"</span>);
+}</div>
+    <div class="out">→ Tue</div>
+  </div>
+</div>
+
+<div class="card brk">
+  <div class="card-head"><div class="lbl">break</div><div class="ttl">Why it matters</div></div>
+  <div class="body">
+    <div class="desc">Without <span style="font-family:var(--font-mono);font-size:12px">break</span>, execution <span style="font-weight:500">falls through</span> into the next case automatically.</div>
+    <div class="cb"><span class="kw">let</span> x = 1;
+<span class="kw">switch</span> (x) {
+  <span class="kw">case</span> 1:
+    console.log(<span class="str">"A"</span>); <span class="cm">// no break!</span>
+  <span class="kw">case</span> 2:
+    console.log(<span class="str">"B"</span>);
+}</div>
+    <div class="out out-warn">→ A  B  (both run!)</div>
+  </div>
+</div>
+
+<div class="card ft">
+  <div class="card-head"><div class="lbl">Fall-through</div><div class="ttl">Intentional grouping</div></div>
+  <div class="body">
+    <div class="desc">Stack multiple cases with no code between them to share one action — intentional fall-through.</div>
+    <div class="cb"><span class="kw">switch</span> (day) {
+  <span class="kw">case</span> 1:
+  <span class="kw">case</span> 2:
+  <span class="kw">case</span> 3:
+    console.log(<span class="str">"Weekday"</span>);
+    <span class="kw">break</span>;
+  <span class="kw">case</span> 6:
+  <span class="kw">case</span> 7:
+    console.log(<span class="str">"Weekend"</span>);
+    <span class="kw">break</span>;
+}</div>
+  </div>
+</div>
+
+<div class="card grp">
+  <div class="card-head"><div class="lbl">default</div><div class="ttl">Catch-all case</div></div>
+  <div class="body">
+    <div class="desc"><span style="font-family:var(--font-mono);font-size:12px">default</span> is like <span style="font-family:var(--font-mono);font-size:12px">else</span> — runs when no case matches. No <span style="font-family:var(--font-mono);font-size:12px">break</span> needed if it's last.</div>
+    <div class="cb"><span class="kw">switch</span> (color) {
+  <span class="kw">case</span> <span class="str">"red"</span>:
+    console.log(<span class="str">"Stop"</span>); <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="str">"green"</span>:
+    console.log(<span class="str">"Go"</span>); <span class="kw">break</span>;
+  <span class="kw">default</span>:
+    console.log(<span class="str">"Unknown"</span>);
+}</div>
+  </div>
+</div>
+
+</div>
+</div>

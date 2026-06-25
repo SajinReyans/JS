@@ -1,0 +1,133 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.ttl{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.8;white-space:pre}
+.out{font-size:12px;font-family:var(--font-mono);color:var(--color-text-secondary);margin-top:8px;padding:4px 8px;background:var(--color-background-tertiary);border-radius:4px;border-left:2px solid #1D9E75}
+.out-warn{border-left-color:#E24B4A}
+.chain{display:flex;flex-direction:column;gap:0;margin-bottom:10px}
+.chain-item{font-family:var(--font-mono);font-size:12px;padding:5px 10px;border:0.5px solid var(--color-border-tertiary)}
+.chain-item:first-child{border-radius:6px 6px 0 0}
+.chain-item:last-child{border-radius:0 0 6px 6px}
+.chain-arrow{font-size:12px;color:var(--color-text-secondary);text-align:center;padding:2px 0;font-family:var(--font-sans)}
+.kw{color:#185FA5}.str{color:#3B6D11}.cm{color:#888780;font-style:italic}.num{color:#854F0B}
+.gl .card-head{background:#E6F1FB}.gl .lbl{color:#185FA5}.gl .chain-item{background:#E6F1FB;color:#0C447C}
+.fn .card-head{background:#EEEDFE}.fn .lbl{color:#534AB7}
+.bl .card-head{background:#FAEEDA}.bl .lbl{color:#854F0B}
+.lex .card-head{background:#E1F5EE}.lex .lbl{color:#0F6E56}
+.sc .card-head{background:#F1EFE8}.sc .lbl{color:#5F5E5A}
+.cl .card-head{background:#FAECE7}.cl .lbl{color:#993C1D}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Scope &amp; closures</h1>
+<p class="cs-sub">Where variables live, how JS searches for them, and how closures remember values</p>
+<div class="grid">
+
+<div class="card gl">
+  <div class="card-head"><div class="lbl">Global scope</div><div class="ttl">Accessible everywhere</div></div>
+  <div class="body">
+    <div class="desc">Variables declared outside any function or block are available in the entire file.</div>
+    <div class="cb"><span class="kw">let</span> x = <span class="num">10</span>;
+
+<span class="kw">function</span> show() {
+  console.log(x); <span class="cm">// ✓ works</span>
+}</div>
+    <div class="out">→ 10</div>
+  </div>
+</div>
+
+<div class="card fn">
+  <div class="card-head"><div class="lbl">Function scope</div><div class="ttl">Trapped inside the function</div></div>
+  <div class="body">
+    <div class="desc">Variables declared inside a function exist only during that function's execution.</div>
+    <div class="cb"><span class="kw">function</span> test() {
+  <span class="kw">let</span> age = <span class="num">20</span>;
+}
+console.log(age); <span class="cm">// ✗ error</span></div>
+    <div class="out out-warn">→ ReferenceError</div>
+  </div>
+</div>
+
+<div class="card bl">
+  <div class="card-head"><div class="lbl">Block scope</div><div class="ttl">let &amp; const inside { }</div></div>
+  <div class="body">
+    <div class="desc"><span style="font-family:var(--font-mono);font-size:12px">let</span> and <span style="font-family:var(--font-mono);font-size:12px">const</span> are block-scoped — they don't escape <span style="font-family:var(--font-mono);font-size:12px">if</span>, <span style="font-family:var(--font-mono);font-size:12px">for</span>, or any <span style="font-family:var(--font-mono);font-size:12px">{ }</span> block.</div>
+    <div class="cb"><span class="kw">if</span> (<span class="kw">true</span>) {
+  <span class="kw">let</span> x = <span class="num">10</span>;
+}
+console.log(x); <span class="cm">// ✗ error</span></div>
+    <div class="out out-warn">→ ReferenceError</div>
+  </div>
+</div>
+
+<div class="card lex">
+  <div class="card-head"><div class="lbl">Lexical scope</div><div class="ttl">Inner sees outer</div></div>
+  <div class="body">
+    <div class="desc">A nested function can read variables from its parent — but the parent cannot reach inside the child.</div>
+    <div class="cb"><span class="kw">function</span> outer() {
+  <span class="kw">let</span> a = <span class="num">10</span>;
+  <span class="kw">function</span> inner() {
+    console.log(a); <span class="cm">// ✓</span>
+  }
+  inner();
+}
+outer();</div>
+    <div class="out">→ 10</div>
+  </div>
+</div>
+
+<div class="card sc">
+  <div class="card-head"><div class="lbl">Scope chain</div><div class="ttl">JS searches upward</div></div>
+  <div class="body">
+    <div class="desc">When a variable isn't found locally, JS walks up through parent scopes until it hits global — or throws.</div>
+    <div class="chain">
+      <div class="chain-item" style="background:var(--color-background-info);color:var(--color-text-info)">local (inner) → z</div>
+      <div class="chain-arrow">↑ not found? look up</div>
+      <div class="chain-item" style="background:var(--color-background-secondary)">parent (a) → y</div>
+      <div class="chain-arrow">↑ not found? look up</div>
+      <div class="chain-item" style="background:var(--color-background-secondary)">global → x</div>
+    </div>
+    <div class="cb"><span class="kw">let</span> x = <span class="num">1</span>;
+<span class="kw">function</span> a() {
+  <span class="kw">let</span> y = <span class="num">2</span>;
+  <span class="kw">function</span> b() {
+    <span class="kw">let</span> z = <span class="num">3</span>;
+    console.log(x, y, z);
+  }
+  b();
+}
+a();</div>
+    <div class="out">→ 1  2  3</div>
+  </div>
+</div>
+
+<div class="card cl">
+  <div class="card-head"><div class="lbl">Closures</div><div class="ttl">Function remembers outer vars</div></div>
+  <div class="body">
+    <div class="desc">The returned function keeps a live reference to <span style="font-family:var(--font-mono);font-size:12px">count</span> even after <span style="font-family:var(--font-mono);font-size:12px">counter()</span> finishes — this is a closure.</div>
+    <div class="cb"><span class="kw">function</span> counter() {
+  <span class="kw">let</span> count = <span class="num">0</span>;
+  <span class="kw">return function</span>() {
+    count++;
+    console.log(count);
+  };
+}
+
+<span class="kw">const</span> c = counter();
+c(); <span class="cm">// 1</span>
+c(); <span class="cm">// 2</span></div>
+    <div class="out">→ 1  then  2</div>
+  </div>
+</div>
+
+</div>
+</div>

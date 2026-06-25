@@ -1,0 +1,123 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-bottom:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.ttl{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.body{padding:12px 14px}
+.desc{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);margin-bottom:10px;line-height:1.5}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.8;white-space:pre}
+.out{font-size:12px;font-family:var(--font-mono);color:var(--color-text-secondary);margin-top:8px;padding:4px 8px;background:var(--color-background-tertiary);border-radius:4px;border-left:2px solid #1D9E75}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:12px;font-family:var(--font-mono);padding:3px 9px;border-radius:4px}
+.tag-f{background:#FCEBEB;color:#791F1F}
+.tag-t{background:#EAF3DE;color:#27500A}
+.kw{color:#185FA5}.fn{color:#854F0B}.cm{color:#888780;font-style:italic}.str{color:#3B6D11}
+.if .card-head{background:#E6F1FB}.if .lbl{color:#185FA5}
+.els .card-head{background:#EEEDFE}.els .lbl{color:#534AB7}
+.elif .card-head{background:#E1F5EE}.elif .lbl{color:#0F6E56}
+.tf .card-head{background:#FAEEDA}.tf .lbl{color:#854F0B}
+.nest .card-head{background:#FAECE7}.nest .lbl{color:#993C1D}
+.log .card-head{background:#F1EFE8}.log .lbl{color:#5F5E5A}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">Conditionals — if / else / else if</h1>
+<p class="cs-sub">Control which block of code runs based on a condition</p>
+<div class="grid">
+
+<div class="card if">
+  <div class="card-head"><div class="lbl">if</div><div class="ttl">Run if true</div></div>
+  <div class="body">
+    <div class="desc">Executes the block only when the condition is truthy.</div>
+    <div class="cb"><span class="kw">let</span> age = 18;
+<span class="kw">if</span> (age >= 18) {
+  console.log(<span class="str">"Adult"</span>);
+}</div>
+    <div class="out">→ Adult</div>
+  </div>
+</div>
+
+<div class="card els">
+  <div class="card-head"><div class="lbl">else</div><div class="ttl">Fallback when false</div></div>
+  <div class="body">
+    <div class="desc">Runs when the <span style="font-family:var(--font-mono);font-size:12px">if</span> condition is falsy.</div>
+    <div class="cb"><span class="kw">let</span> age = 15;
+<span class="kw">if</span> (age >= 18) {
+  console.log(<span class="str">"Adult"</span>);
+} <span class="kw">else</span> {
+  console.log(<span class="str">"Minor"</span>);
+}</div>
+    <div class="out">→ Minor</div>
+  </div>
+</div>
+
+<div class="card elif">
+  <div class="card-head"><div class="lbl">else if</div><div class="ttl">Multiple conditions</div></div>
+  <div class="body">
+    <div class="desc">Chain additional checks — first truthy block wins.</div>
+    <div class="cb"><span class="kw">let</span> marks = 80;
+<span class="kw">if</span> (marks >= 90) {
+  console.log(<span class="str">"A"</span>);
+} <span class="kw">else if</span> (marks >= 70) {
+  console.log(<span class="str">"B"</span>);
+} <span class="kw">else</span> {
+  console.log(<span class="str">"C"</span>);
+}</div>
+    <div class="out">→ B</div>
+  </div>
+</div>
+
+<div class="card tf">
+  <div class="card-head"><div class="lbl">Truthy &amp; Falsy</div><div class="ttl">What counts as false?</div></div>
+  <div class="body">
+    <div class="desc">These 7 values are falsy — everything else is truthy.</div>
+    <div class="tags">
+      <span class="tag tag-f">false</span><span class="tag tag-f">0</span><span class="tag tag-f">-0</span><span class="tag tag-f">""</span><span class="tag tag-f">null</span><span class="tag tag-f">undefined</span><span class="tag tag-f">NaN</span>
+    </div>
+    <div class="tags">
+      <span class="tag tag-t">"hello"</span><span class="tag tag-t">1</span><span class="tag tag-t">[]</span><span class="tag tag-t">{}</span>
+    </div>
+    <div class="cb" style="margin-top:8px"><span class="kw">if</span> (<span class="str">"hello"</span>) {
+  console.log(<span class="str">"Runs"</span>);
+}</div>
+    <div class="out">→ Runs</div>
+  </div>
+</div>
+
+<div class="card nest">
+  <div class="card-head"><div class="lbl">Nested if</div><div class="ttl">if inside an if</div></div>
+  <div class="body">
+    <div class="desc">Nest an <span style="font-family:var(--font-mono);font-size:12px">if</span> block inside another to check multiple conditions step by step.</div>
+    <div class="cb"><span class="kw">let</span> age = 20;
+<span class="kw">let</span> hasID = <span class="kw">true</span>;
+<span class="kw">if</span> (age >= 18) {
+  <span class="kw">if</span> (hasID) {
+    console.log(<span class="str">"Allowed"</span>);
+  }
+}</div>
+    <div class="out">→ Allowed</div>
+  </div>
+</div>
+
+<div class="card log">
+  <div class="card-head"><div class="lbl">Logical operators</div><div class="ttl">Combine conditions</div></div>
+  <div class="body">
+    <div class="desc">Use inside <span style="font-family:var(--font-mono);font-size:12px">if</span> to combine multiple checks without nesting.</div>
+    <div class="tags" style="margin-bottom:8px">
+      <span class="tag" style="background:#E6F1FB;color:#0C447C">&amp;&amp; both true</span>
+      <span class="tag" style="background:#EEEDFE;color:#3C3489">|| either true</span>
+      <span class="tag" style="background:#F1EFE8;color:#444441">! not</span>
+    </div>
+    <div class="cb"><span class="kw">if</span> (age >= 18 &amp;&amp; hasID) {
+  console.log(<span class="str">"Allowed"</span>);
+}</div>
+  </div>
+</div>
+
+</div>
+</div>
