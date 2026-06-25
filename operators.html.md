@@ -1,0 +1,100 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-mono,'Courier New',monospace)}
+.cs-wrap{padding:1rem 0}
+.cs-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-sans)}
+.cs-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 14px 8px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.card-head-label{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-family:var(--font-sans)}
+.card-head-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-top:2px;font-family:var(--font-sans)}
+.ops{padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px}
+.op{font-family:var(--font-mono);font-size:13px;padding:3px 9px;border-radius:5px;display:inline-block;line-height:1.5}
+.arith .card-head{background:#E6F1FB}.arith .card-head-label{color:#185FA5}.arith .op{background:#E6F1FB;color:#0C447C}
+.assign .card-head{background:#EAF3DE}.assign .card-head-label{color:#3B6D11}.assign .op{background:#EAF3DE;color:#27500A}
+.comp .card-head{background:#FAEEDA}.comp .card-head-label{color:#854F0B}.comp .op{background:#FAEEDA;color:#633806}
+.logic .card-head{background:#EEEDFE}.logic .card-head-label{color:#534AB7}.logic .op{background:#EEEDFE;color:#3C3489}
+.bitw .card-head{background:#FAECE7}.bitw .card-head-label{color:#993C1D}.bitw .op{background:#FAECE7;color:#712B13}
+.str .card-head{background:#FBEAF0}.str .card-head-label{color:#993556}.str .op{background:#FBEAF0;color:#72243E}
+.other .card-head{background:#E1F5EE}.other .card-head-label{color:#0F6E56}.other .op{background:#E1F5EE;color:#085041}
+.misc .card-head{background:#F1EFE8}.misc .card-head-label{color:#5F5E5A}.misc .op{background:#F1EFE8;color:#444441}
+</style>
+<div class="cs-wrap">
+<h1 class="cs-title">JavaScript operators</h1>
+<p class="cs-sub">All operators grouped by category</p>
+<div class="grid">
+<div class="card arith">
+  <div class="card-head"><div class="card-head-label">Arithmetic</div><div class="card-head-title">Math operations</div></div>
+  <div class="ops">
+    <span class="op">+</span><span class="op">-</span><span class="op">*</span><span class="op">/</span><span class="op">%</span><span class="op">**</span><span class="op">++</span><span class="op">--</span>
+  </div>
+</div>
+<div class="card assign">
+  <div class="card-head"><div class="card-head-label">Assignment</div><div class="card-head-title">Assign &amp; update</div></div>
+  <div class="ops">
+    <span class="op">=</span><span class="op">+=</span><span class="op">-=</span><span class="op">*=</span><span class="op">/=</span><span class="op">%=</span><span class="op">**=</span><span class="op">&lt;&lt;=</span><span class="op">&gt;&gt;=</span><span class="op">&gt;&gt;&gt;=</span><span class="op">&amp;=</span><span class="op">|=</span><span class="op">^=</span><span class="op">&amp;&amp;=</span><span class="op">||=</span><span class="op">??=</span>
+  </div>
+</div>
+<div class="card comp">
+  <div class="card-head"><div class="card-head-label">Comparison</div><div class="card-head-title">Compare values</div></div>
+  <div class="ops">
+    <span class="op">==</span><span class="op">===</span><span class="op">!=</span><span class="op">!==</span><span class="op">&gt;</span><span class="op">&lt;</span><span class="op">&gt;=</span><span class="op">&lt;=</span>
+  </div>
+</div>
+<div class="card logic">
+  <div class="card-head"><div class="card-head-label">Logical</div><div class="card-head-title">Boolean logic</div></div>
+  <div class="ops">
+    <span class="op">&amp;&amp;</span><span class="op">||</span><span class="op">!</span><span class="op">??</span>
+  </div>
+</div>
+<div class="card bitw">
+  <div class="card-head"><div class="card-head-label">Bitwise</div><div class="card-head-title">Bit manipulation</div></div>
+  <div class="ops">
+    <span class="op">&amp;</span><span class="op">|</span><span class="op">^</span><span class="op">~</span><span class="op">&lt;&lt;</span><span class="op">&gt;&gt;</span><span class="op">&gt;&gt;&gt;</span>
+  </div>
+</div>
+<div class="card str">
+  <div class="card-head"><div class="card-head-label">String</div><div class="card-head-title">Concatenation</div></div>
+  <div class="ops">
+    <span class="op">+</span><span class="op">+=</span>
+  </div>
+</div>
+<div class="card other">
+  <div class="card-head"><div class="card-head-label">Type</div><div class="card-head-title">Type checks</div></div>
+  <div class="ops">
+    <span class="op">typeof</span><span class="op">instanceof</span>
+  </div>
+</div>
+<div class="card other">
+  <div class="card-head"><div class="card-head-label">Object</div><div class="card-head-title">Object ops</div></div>
+  <div class="ops">
+    <span class="op">delete</span><span class="op">in</span><span class="op">new</span>
+  </div>
+</div>
+<div class="card misc">
+  <div class="card-head"><div class="card-head-label">Ternary</div><div class="card-head-title">Conditional</div></div>
+  <div class="ops"><span class="op">? :</span></div>
+</div>
+<div class="card misc">
+  <div class="card-head"><div class="card-head-label">Spread / Rest</div><div class="card-head-title">Expand or collect</div></div>
+  <div class="ops"><span class="op">...</span></div>
+</div>
+<div class="card misc">
+  <div class="card-head"><div class="card-head-label">Optional chain</div><div class="card-head-title">Safe access</div></div>
+  <div class="ops"><span class="op">?.</span></div>
+</div>
+<div class="card misc">
+  <div class="card-head"><div class="card-head-label">Async / Gen</div><div class="card-head-title">Async &amp; generator</div></div>
+  <div class="ops">
+    <span class="op">await</span><span class="op">yield</span><span class="op">yield*</span>
+  </div>
+</div>
+<div class="card misc">
+  <div class="card-head"><div class="card-head-label">Other</div><div class="card-head-title">Grouping &amp; comma</div></div>
+  <div class="ops">
+    <span class="op">( )</span><span class="op">,</span>
+  </div>
+</div>
+</div>
+</div>
